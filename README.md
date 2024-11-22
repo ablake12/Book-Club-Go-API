@@ -7,7 +7,7 @@ This API has the functionality to:
 - Update whether the book club has read a book yet
 - Update what current book the book club is on
 ## Prerequisites
-Go 1.23.2+
+Go 1.23+
 ## Usage
 1. Open terminal and run the program in the current working directory
 2. Initialize mod file
