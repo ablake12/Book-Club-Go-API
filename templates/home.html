@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/styles.css">
+        <script src="/static/home.js"></script>
+        <style>
+            label {
+                display: inline-block; 
+                width: 100px; 
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Hello! Welcome to the Book Club API. This is where you'll be able to manage your book club and make your API calls.</h2>
+            <p>Your options to use the API are:</p>
+            <ul>
+                <li>Through the interface below</li>
+                <li>Through Postman</li>
+            </ul>
+            <p>Enjoy!</p><br>
+        </div>
+        <div class = "api-method">
+            <details>
+                <summary class = "dropdown">GET</summary><br>
+                <div class="get-method">
+                    <details>
+                        <summary>
+                            <span>GET All Books</span>
+                            <span class="url-text">&nbsp;&nbsp;/books</span>
+                        </summary><br>
+                        <form onsubmit="getBooks(); return false;">
+                            <button type="submit" class="api-button">GET</button>
+                            <button type="button" class="clear-button" onclick="clearBooks()">CLEAR</button>
+                            <div id="all-books-http" class="http-display" style="display: none;"></div>
+                            <div id="all-books-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="get-method">
+                    <details>
+                        <summary>
+                            <span>GET Read Books</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/read</span>
+                        </summary><br>
+                        <form onsubmit="getReadBooks(); return false;">
+                            <button type="submit" class="api-button">GET</button>
+                            <button type="button" class="clear-button" onclick="clearReadBooks()">CLEAR</button>
+                            <div id="read-books-http" class="http-display" style="display: none;"></div>
+                            <div id="read-books-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="get-method">
+                    <details>
+                        <summary>
+                            <span>GET Unread Books</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/unread</span>
+                        </summary><br>
+                        <form onsubmit="getUnreadBooks(); return false;">
+                            <button type="submit" class="api-button">GET</button>
+                            <button type="button" class="clear-button" onclick="clearUnreadBooks()">CLEAR</button>
+                            <div id="unread-books-http" class="http-display" style="display: none;"></div>
+                            <div id="unread-books-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="get-method">
+                    <details>
+                        <summary>
+                            <span>GET Current Book</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/current</span>
+                        </summary><br>
+                        <form onsubmit="getCurrentBook(); return false;">
+                            <button type="submit" class="api-button">GET</button>
+                            <button type="button" class="clear-button" onclick="clearCurrentBook()">CLEAR</button>
+                            <div id="current-book-http" class="http-display" style="display: none;"></div>
+                            <div id="current-book-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="get-method">
+                    <details>
+                        <summary>
+                            <span>GET Reviews by Book ID</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;/reviews</span>
+                        </summary><br>
+                        <form id="get-reviews-form" onsubmit="getReviews(this.book_id.value); return false;">
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" required><br><br>
+                            <button type="submit" class="api-button">GET</button>
+                            <button type="button" class="clear-button" onclick="clearReviews()">CLEAR</button>
+                            <div id="reviews-http" class="http-display" style="display: none;"></div>
+                            <div id="reviews-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+            </details>
+        </div>
+        <div class = "api-method">
+            <details>
+                <summary>POST</summary><br>
+                <div class="post-method">
+                    <details>
+                        <summary>
+                            <span>POST a Book</span>
+                            <span class="url-text">&nbsp;&nbsp;/books</span>
+                        </summary><br>
+                        <form id="add-book-form" onsubmit="addBook(); return false;">
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" name="title" required><br><br>
+                            <label for="author">Author:</label>
+                            <input type="text" id="author" name="author" required><br><br>
+                            <label for="genre">Genre:</label>
+                            <input type="text" id="genre" name="genre" required><br><br>
+                            <label for="desc">Description:</label>
+                            <!-- <input type="text" id="desc" name="desc" required><br><br> -->
+                            <textarea id="desc" name="desc" style="resize: both; width: 10.4%; height: 15px;" required></textarea><br><br>
+                            <label for="read_status">Read Status:</label>
+                            <input type="text" id="read_status" name="read_status"><br><br>
+                            <label for="curr_status">Current Book:</label>
+                            <input type="text" id="curr_status" name="curr_status"><br><br>
+                            <button type="submit" class="api-button">POST</button>
+                            <button type="button" class="clear-button" onclick="clearAddBook()">CLEAR</button>
+                            <div id="add-book-http" class="http-display" style="display: none;"></div>
+                            <div id="add-book-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="post-method">
+                    <details>
+                        <summary>
+                            <span>POST a Review by Book ID</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;/reviews</span>
+                        </summary><br>
+                        <form id="add-review-form" onsubmit="addReview(this.book_id.value); return false;">
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" required><br><br>
+                            <label for="user">User:</label>
+                            <input type="text" id="user" name="user" required><br><br>
+                            <label for="review">Review:</label>
+                            <!-- <input type="text" id="review" name="review" required><br><br> -->
+                            <textarea id="review" name="review" style="resize: both; width: 10.4%; height: 15px;"></textarea><br><br>
+                            <label for="rating">Rating:</label>
+                            <input type="number" id="rating" name="rating" min="1" max="5" step="0.5" required><br><br>
+                            <button type="submit" class="api-button">POST</button>
+                            <button type="button" class="clear-button" onclick="clearAddReview()">CLEAR</button>
+                            <div id="add-review-http" class="http-display" style="display: none;"></div>
+                            <div id="add-review-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+            </details>
+        </div>
+        <div class = "api-method">
+            <details>
+                <summary>PUT</summary><br>
+                <div class="put-method">
+                    <details>
+                        <summary>
+                            <span>PUT a Book Read Status by Book ID</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;/status</span>
+                        </summary><br>
+                        <form id="update-read-form" onsubmit="updateReadStatus(this.book_id.value); return false;">
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" required><br><br>
+                            <button type="submit" class="api-button">PUT</button>
+                            <button type="button" class="clear-button" onclick="clearUpdateReadStatus()">CLEAR</button>
+                            <div id="update-read-http" class="http-display" style="display: none;"></div>
+                            <div id="update-read-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="put-method">
+                    <details>
+                        <summary>
+                            <span>PUT a Book Current Status by Book ID</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;/current</span>
+                        </summary><br>
+                        <form id="update-curr-form" onsubmit="updateCurrStatus(this.book_id.value); return false;">
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" required><br><br>
+                            <button type="submit" class="api-button">PUT</button>
+                            <button type="button" class="clear-button" onclick="clearUpdateCurrStatus()">CLEAR</button>
+                            <div id="update-curr-http" class="http-display" style="display: none;"></div>
+                            <div id="update-curr-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="put-method">
+                    <details>
+                        <summary>
+                            <span>PUT a Review by Book and Reviews IDs</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;/reviews/&lt;review_id&gt;</span>
+                        </summary><br>
+                        <form id="update-review-form" onsubmit="updateReview(this.book_id.value, this.review_id.value); return false;">
+                            <label for="review_id">ID:</label>
+                            <input type="number" id="review_id" name="review_id" min="1" required><br><br>
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" min="1" required><br><br>
+                            <label for="review">Review:</label>
+                            <!-- <input type="text" id="update_review" name="review" required><br><br> -->
+                            <textarea id="update_review" name="review" style="resize: both; width: 10.4%; height: 15px;"></textarea><br><br>
+                            <label for="rating">Rating:</label>
+                            <input type="number" id="update_rating" name="rating" min="1" max="5" step="0.5" required><br><br>
+                            <button type="submit" class="api-button">PUT</button>
+                            <button type="button" class="clear-button" onclick="clearUpdateReview()">CLEAR</button>
+                            <div id="update-review-http" class="http-display" style="display: none;"></div>
+                            <div id="update-review-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+            </details>
+        </div>
+        <div class = "api-method">
+            <details>
+                <summary>DELETE</summary><br>
+                <div class="delete-method">
+                    <details>
+                        <summary>
+                            <span>DELETE a Book by Book ID</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;</span>
+                        </summary><br>
+                        <form id="delete-book-form" onsubmit="deleteBook(this.book_id.value); return false;">
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" required><br><br>
+                            <button type="submit" class="api-button">DELETE</button>
+                            <button type="button" class="clear-button" onclick="clearDeleteBook()">CLEAR</button>
+                            <div id="delete-book-http" class="http-display" style="display: none;"></div>
+                            <div id="delete-book-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="delete-method">
+                    <details>
+                        <summary>
+                            <span>DELETE a Review by Book and Review IDs</span>
+                            <span class="url-text">&nbsp;&nbsp;/books/&lt;book_id&gt;/reviews/&lt;review_id&gt;</span>
+                        </summary><br>
+                        <form id="delete-review-form" onsubmit="deleteReview(this.book_id.value, this.review_id.value); return false;">
+                            <label for="review_id">ID:</label>
+                            <input type="number" id="review_id" name="review_id" required><br><br>
+                            <label for="book_id">Book ID:</label>
+                            <input type="number" id="book_id" name="book_id" required><br><br>
+                            <button type="submit" class="api-button">DELETE</button>
+                            <button type="button" class="clear-button" onclick="clearDeleteReview()">CLEAR</button>
+                            <div id="delete-review-http" class="http-display" style="display: none;"></div>
+                            <div id="delete-review-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+                <div class="delete-method">
+                    <details>
+                        <summary>
+                            <span>DELETE All Books</span>
+                            <span class="url-text">&nbsp;&nbsp;/books</span>
+                        </summary><br>
+                        <form onsubmit="deleteAllBooks(); return false;">
+                            <button type="submit" class="api-button">DELETE</button>
+                            <button type="button" class="clear-button" onclick="clearDeleteBooks()">CLEAR</button>
+                            <div id="delete-all-http" class="http-display" style="display: none;"></div>
+                            <div id="delete-all-json" class="json-display" style="display: none;"></div>
+                        </form>
+                    </details>
+                </div>
+            </details>
+        </div>
+    </body>
+</html>
