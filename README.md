@@ -1,5 +1,5 @@
 # Book-Club-Go-API
-Hello. This is a REST API that manages a virtual Book Club using SQLite for storing and managing the the data. Users can interact with this API through a User Interface or through postman.
+Hello! This is a REST API that manages a virtual Book Club using SQLite for storing and managing the the data. Users can interact with this API through a User Interface or through postman.
 This API has the functionality to:
 - Add and delete books
 - Add, update, and delete reviews to the books
