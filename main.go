@@ -335,7 +335,7 @@ func getReviews(c *gin.Context) {
 
 func postBook(c *gin.Context) {
 	var newBook book
-	// Retrieve body request for review
+	// Retrieve body request for book
 	if err := c.BindJSON(&newBook); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
