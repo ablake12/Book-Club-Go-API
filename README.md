@@ -52,6 +52,9 @@ Your options to use the API are:
 - Through the interface on the home page at route `<port>/`
 - Through Postman
 
+## Demo
+[Demo](https://youtu.be/kjG412ypQd8)
+
 ## Postman Instructions
 To add a book in Postman, use the following json in the body
 ```json
